@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> basic To-do app list</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <div class="todocontainer">
+
+        <h1><span id="to">To- <span id="do">do-</span><span id="app">App-list</span></span></h1>
+
+        <div class="inputcontainer">
+            <input type="text" id="taskinput" placeholder="Add a new task....">
+            <button onclick="addtask()"><i class="fa-regular fa-plus"></i></button>
+        </div>
+        <ul id="tasklist"></ul>
+    </div>
+
+    <!-- js -->
+
+    <script>
+        const taskinput = document.getElementById("taskinput");
+        const tasklist = document.getElementById("tasklist");
+
+        // function add task:
+
+        function addtask() {
+            const tasktext = taskinput.value.trim();
+            if (tasktext === "") return;
+
+            const li = document.createElement("li");
+            li.innerHTML = `
+                            <span>${tasktext}</span>
+                            <button onclick="toggleTaskCompleted(this)"> <i class="fa-solid fa-check"></i></button>
+                            <button onclick="editTask(this)"> <i class="fa-solid fa-pen-to-square"></i></button>
+                            <button onclick="deleteTask(this)"> <i class="fa-solid fa-trash"></i></button> `;
+
+
+
+            tasklist.appendChild(li);
+            taskinput.value = "";
+
+        }
+
+        // done:
+
+        function toggleTaskCompleted(button) {
+            const task = button.parentElement;
+
+            task.classList.toggle('completed');
+        }
+
+        // delete:
+
+        function deleteTask(button) {
+            const task = button.parentElement;
+
+            task.remove();
+        }
+
+        // edit:
+
+        function editTask(button) {
+            const task = button.parentElement;
+            const span = task.querySelector('span');
+            const newText = prompt('Edit the Task:', span.innerText);
+
+            if (newText !== null) {
+                span.innerText = newText;
+            }
+
+        }
+
+    </script>
+</body>
+
+</html>

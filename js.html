@@ -1,0 +1,22 @@
+ <!-- js -->
+
+ <script>
+    const taskinput=document.getElementById("taskinput");
+    const tasklist=document.getElementById("tasklist");
+
+    // function add task:
+
+    function addtask(){
+        const tasktext=taskinput.value.trim();
+        if(tasktext==="")return;
+
+        const li=document.createElement("li");
+        li.innerHTML=`<span>${tasktext}</span>`;
+
+
+        tasklist.appendChild(li);
+        taskinput.value="";
+
+    }
+
+</script>
